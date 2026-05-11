@@ -1,3 +1,13 @@
+	/** EL2008 Praktikum Pemecahan Masalah dengan Pemrograman 2024/2025
+ *   Modul               : : 05 - Foundation of Algorithm
+ *   Hari dan Tanggal    : Senin, 11 May 2026
+ *   Nama (NIM)          : Marcello Menata Pandiangan (13224069)
+ *   Nama File           : prak5_13224069.c
+ *   Deskripsi           : Jadwal Misi Bertabrakan
+ *  SUMBER https://www.w3resource.com/c-programming-exercises/graph/c-graph-exercises-6.php
+ *  SUMBER https://www.geeksforgeeks.org/c/graph-cycle-detection-in-c/
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -85,7 +95,6 @@ int main()
     for (int i = 0; i < m; i++) {
         int start, end;
         scanf("%d %d", &start, &end);
-
         tambahm(graph, start, end);
     }
 
