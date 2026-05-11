@@ -1,85 +1,85 @@
+	/** EL2008 Praktikum Pemecahan Masalah dengan Pemrograman 2024/2025
+ *   Modul               : : 05 - Foundation of Algorithm
+ *   Hari dan Tanggal    : Senin, 11 May 2026
+ *   Nama (NIM)          : Marcello Menata Pandiangan (13224069)
+ *   Nama File           : prak5_13224069.c
+ *   Deskripsi           : Jadwal Misi Bertabrakan
+ *  SUMBER https://www.w3resource.com/c-programming-exercises/graph/c-graph-exercises-6.php
+ *  SUMBER https://www.geeksforgeeks.org/c/graph-cycle-detection-in-c/
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_VERTICES 100
+#define MAX_n 100
 
-// Graph structure
 struct Graph {
-    int numVertices;
-    int** adjMatrix;
+    int totaln;
+    int** matriks;
 };
 
 // Create a graph
-struct Graph* createGraph(int vertices)
+struct Graph* createGraph(int n)
 {
-    struct Graph* graph
-        = (struct Graph*)malloc(sizeof(struct Graph));
-    graph->numVertices = vertices;
+    struct Graph* graph= (struct Graph*)malloc(sizeof(struct Graph));
+    graph->totaln = n;
 
-    graph->adjMatrix
-        = (int**)malloc(vertices * sizeof(int*));
-    for (int i = 0; i < vertices; i++) {
-        graph->adjMatrix[i]
-            = (int*)malloc(vertices * sizeof(int));
-        for (int j = 0; j < vertices; j++) {
-            graph->adjMatrix[i][j] = 0;
+    graph->matriks
+        = (int**)malloc(n * sizeof(int*));
+    for (int i = 0; i < n; i++) {
+        graph->matriks[i]
+            = (int*)malloc(n * sizeof(int));
+        for (int j = 0; j < n; j++) {
+            graph->matriks[i][j] = 0;
         }
     }
     return graph;
 }
 
-// Add edge to the graph
-void addEdge(struct Graph* graph, int src, int dest)
+
+void tambahm(struct Graph* graph, int src, int dest)
 {
-    graph->adjMatrix[src][dest] = 1;
+    graph->matriks[src][dest] = 1;
 }
 
-// Utility function to detect cycle using DFS
 int DFS(struct Graph* graph, int vertex,
-                      int* visited, int* recStack)
+                      int* telahdikunjungi, int* stack)
 {
-    if (!visited[vertex]) {
-        // Mark the current node as visited and add to
-        // recursion stack
-        visited[vertex] = 1;
-        recStack[vertex] = 1;
+    if (!telahdikunjungi[vertex]) {
+        telahdikunjungi[vertex] = 1;
+        stack[vertex] = 1;
 
-        // Recur for all vertices adjacent to this vertex
-        for (int v = 0; v < graph->numVertices; v++) {
-            if (graph->adjMatrix[vertex][v]) {
-                if (!visited[v]
-                    && DFS(graph, v, visited,
-                                         recStack)) {
+        for (int v = 0; v < graph->totaln; v++) {
+            if (graph->matriks[vertex][v]) {
+                if (!telahdikunjungi[v]
+                    && DFS(graph, v, telahdikunjungi,
+                                         stack)) {
                     return 1;
                 }
-                else if (recStack[v]) {
+                else if (stack[v]) {
                     return 1;
                 }
             }
         }
     }
-    recStack[vertex]
-        = 0; // Remove the vertex from recursion stack
+    stack[vertex]= 0; 
     return 0;
 }
 
-// Function to detect cycle in the graph
-int detectCycle(struct Graph* graph)
+int Cek(struct Graph* graph)
 {
-    int* visited
-        = (int*)malloc(graph->numVertices * sizeof(int));
-    int* recStack
-        = (int*)malloc(graph->numVertices * sizeof(int));
+    int* telahdikunjungi
+        = (int*)malloc(graph->totaln * sizeof(int));
+    int* stack
+        = (int*)malloc(graph->totaln * sizeof(int));
 
-    for (int i = 0; i < graph->numVertices; i++) {
-        visited[i] = 0;
-        recStack[i] = 0;
+    for (int i = 0; i < graph->totaln; i++) {
+        telahdikunjungi[i] = 0;
+        stack[i] = 0;
     }
 
-    for (int i = 0; i < graph->numVertices; i++) {
-        if (DFS(graph, i, visited,
-                              recStack)) {
-            return 1;
+    for (int i = 0; i < graph->totaln; i++) {
+        if (DFS(graph, i, telahdikunjungi,stack)) {
+             return 1;
         }
     }
     return 0;
@@ -95,15 +95,13 @@ int main()
         int start, end;
         scanf("%d %d", &start, &end);
 
-        addEdge(graph, start, end);
+        tambahm:(graph, start, end);
     }
-
-    if (detectCycle(graph)) {
+    if (Cek(graph)) {
         printf("TIDAK BISA\n");
     }
     else {
         printf("BISA\n");
     }
-
     return 0;
 }
