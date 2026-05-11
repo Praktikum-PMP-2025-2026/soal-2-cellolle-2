@@ -51,8 +51,7 @@ int DFS(struct Graph* graph, int vertex,
         for (int v = 0; v < graph->totaln; v++) {
             if (graph->matriks[vertex][v]) {
                 if (!telahdilewati[v]
-                    && DFS(graph, v, telahdilewati,
-                                         stack)) {
+                    && DFS(graph, v, telahdilewati, stack)) {
                     return 1;
                 }
                 else if (stack[v]) {
@@ -78,8 +77,7 @@ int cycle(struct Graph* graph)
     }
 
     for (int i = 0; i < graph->totaln; i++) {
-        if (DFS(graph, i, telahdilewati,
-                              stack)) {
+        if (DFS(graph, i, telahdilewati,stack)) {
             return 1;
         }
     }
